@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "build": "gulp build",
+    "watch": "gulp watch",
     "start": "react-native start"
   },
   "dependencies": {
