@@ -4,5 +4,12 @@
   "ref": "master",
   "path": "typings",
   "bundle": "typings/tsd.d.ts",
-  "installed": {}
+  "installed": {
+    "react-native/react-native.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    },
+    "react/react.d.ts": {
+      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+    }
+  }
 }
