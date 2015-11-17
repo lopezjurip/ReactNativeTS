@@ -1,12 +1,20 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es3",
-        "noImplicitAny": false,
+        "target": "es6",
+        "jsx": "react",
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "preserveConstEnums": true,
         "outDir": "built",
-        "rootDir": ".",
-        "sourceMap": false
+        "rootDir": "src",
+        "sourceMap": true
     },
+    "filesGlob": [
+      "typings/**/*.d.ts",
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
     "exclude": [
         "node_modules"
     ]
