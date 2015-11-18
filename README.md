@@ -34,10 +34,5 @@ Open `ios/ReactNativeTS.xcodeproj` in XCode.
 
 Run:
 ```sh
-$ react-native run-android
-```
-
-If you hace errors about *"Unable to download JS bundle"*, try:
-```sh
-adb reverse tcp:8081 tcp:8081
+$ npm run android
 ```
