@@ -1,27 +1,27 @@
 /// <reference path="../typings/tsd.d.ts"/>
 
-import React from 'react-native'
-const { StyleSheet, Text, View } = React
+import React from "react-native";
+const { StyleSheet, Text, View } = React;
 
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#F5FCFF",
     },
     welcome: {
         fontSize: 20,
-        textAlign: 'center',
+        textAlign: "center",
         margin: 10,
     },
     instructions: {
-        textAlign: 'center',
-        color: '#333333',
+        textAlign: "center",
+        color: "#333333",
         marginBottom: 5,
     },
-})
+});
 
 
 export default class App extends React.Component<any, any> {
@@ -38,6 +38,6 @@ export default class App extends React.Component<any, any> {
                     Shake or press menu button for dev menu
                 </Text>
             </View>
-        )
+        );
     }
 }
