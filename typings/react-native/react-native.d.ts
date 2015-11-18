@@ -147,6 +147,10 @@ declare namespace  ReactNative {
         right?: number
     }
 
+    export interface NativeComponent {
+        setNativeProps: (props: Object) => void
+    }
+
     export type AppConfig = {
         appKey: string;
         component: ReactClass<any, any, any>;
@@ -573,11 +577,176 @@ declare namespace  ReactNative {
         value?: string
     }
 
-    export interface TextInputStatic extends React.ComponentClass<TextInputProperties> {
+    export interface TextInputStatic extends NativeComponent, React.ComponentClass<TextInputProperties> {
         blur: () => void
         focus: () => void
     }
 
+
+    export interface GestureResponderEvent {
+        nativeEvent : {
+            /**
+             * Array of all touch events that have changed since the last event
+             */
+            changedTouches: any[]
+
+            /**
+             * The ID of the touch
+             */
+            identifier: string
+
+            /**
+             * The X position of the touch, relative to the element
+             */
+            locationX: number
+
+            /**
+             * The Y position of the touch, relative to the element
+             */
+            locationY: number
+
+            /**
+             * The X position of the touch, relative to the screen
+             */
+            pageX: number
+
+            /**
+             * The Y position of the touch, relative to the screen
+             */
+            pageY: number
+
+            /**
+             * The node id of the element receiving the touch event
+             */
+            target: string
+
+            /**
+             * A time identifier for the touch, useful for velocity calculation
+             */
+            timestamp: number
+
+            /**
+             * Array of all current touches on the screen
+             */
+            touches : any[]
+        }
+    }
+
+    /**
+     * Gesture recognition on mobile devices is much more complicated than web.
+     * A touch can go through several phases as the app determines what the user's intention is.
+     * For example, the app needs to determine if the touch is scrolling, sliding on a widget, or tapping.
+     * This can even change during the duration of a touch. There can also be multiple simultaneous touches.
+     *
+     * The touch responder system is needed to allow components to negotiate these touch interactions
+     * without any additional knowledge about their parent or child components.
+     * This system is implemented in ResponderEventPlugin.js, which contains further details and documentation.
+     *
+     * Best Practices
+     * Users can feel huge differences in the usability of web apps vs. native, and this is one of the big causes.
+     * Every action should have the following attributes:
+     *      Feedback/highlighting- show the user what is handling their touch, and what will happen when they release the gesture
+     *      Cancel-ability- when making an action, the user should be able to abort it mid-touch by dragging their finger away
+     *
+     * These features make users more comfortable while using an app,
+     * because it allows people to experiment and interact without fear of making mistakes.
+     *
+     * TouchableHighlight and Touchable*
+     * The responder system can be complicated to use.
+     * So we have provided an abstract Touchable implementation for things that should be "tappable".
+     * This uses the responder system and allows you to easily configure tap interactions declaratively.
+     * Use TouchableHighlight anywhere where you would use a button or link on web.
+     */
+    export interface GestureResponderHandlers {
+
+        /**
+         * A view can become the touch responder by implementing the correct negotiation methods.
+         * There are two methods to ask the view if it wants to become responder:
+         */
+
+        /**
+         * Does this view want to become responder on the start of a touch?
+         */
+        onStartShouldSetResponder?: (event: GestureResponderEvent) => boolean
+
+        /**
+         * Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
+         */
+        onMoveShouldSetResponder?: (event: GestureResponderEvent) => boolean
+
+        /**
+         * If the View returns true and attempts to become the responder, one of the following will happen:
+         */
+
+        /**
+         * The View is now responding for touch events.
+         * This is the time to highlight and show the user what is happening
+         */
+        onResponderGrant?: (event: GestureResponderEvent) => void
+
+        /**
+         * Something else is the responder right now and will not release it
+         */
+        onResponderReject?: (event: GestureResponderEvent) => void
+
+        /**
+         * If the view is responding, the following handlers can be called:
+         */
+
+        /**
+         * The user is moving their finger
+         */
+        onResponderMove?: (event: GestureResponderEvent) => void
+
+        /**
+         * Fired at the end of the touch, ie "touchUp"
+         */
+        onResponderRelease?: (event: GestureResponderEvent) => void
+
+        /**
+         *  Something else wants to become responder.
+         *  Should this view release the responder? Returning true allows release
+         */
+        onResponderTerminationRequest?: (event: GestureResponderEvent) => boolean
+
+        /**
+         * The responder has been taken from the View.
+         * Might be taken by other views after a call to onResponderTerminationRequest,
+         * or might be taken by the OS without asking (happens with control center/ notification center on iOS)
+         */
+        onResponderTerminate?: (event: GestureResponderEvent) => void
+
+        /**
+         * onStartShouldSetResponder and onMoveShouldSetResponder are called with a bubbling pattern,
+         * where the deepest node is called first.
+         * That means that the deepest component will become responder when multiple Views return true for *ShouldSetResponder handlers.
+         * This is desirable in most cases, because it makes sure all controls and buttons are usable.
+         *
+         * However, sometimes a parent will want to make sure that it becomes responder.
+         * This can be handled by using the capture phase.
+         * Before the responder system bubbles up from the deepest component,
+         * it will do a capture phase, firing on*ShouldSetResponderCapture.
+         * So if a parent View wants to prevent the child from becoming responder on a touch start,
+         * it should have a onStartShouldSetResponderCapture handler which returns true.
+         */
+        onStartShouldSetResponderCapture?: (event: GestureResponderEvent) => boolean
+
+        /**
+         * onStartShouldSetResponder and onMoveShouldSetResponder are called with a bubbling pattern,
+         * where the deepest node is called first.
+         * That means that the deepest component will become responder when multiple Views return true for *ShouldSetResponder handlers.
+         * This is desirable in most cases, because it makes sure all controls and buttons are usable.
+         *
+         * However, sometimes a parent will want to make sure that it becomes responder.
+         * This can be handled by using the capture phase.
+         * Before the responder system bubbles up from the deepest component,
+         * it will do a capture phase, firing on*ShouldSetResponderCapture.
+         * So if a parent View wants to prevent the child from becoming responder on a touch start,
+         * it should have a onStartShouldSetResponderCapture handler which returns true.
+         */
+        onMoveShouldSetResponderCapture?: () => void;
+
+    }
 
     // @see https://facebook.github.io/react-native/docs/view.html#style
     export interface ViewStyle extends FlexStyle, TransformsStyle {
@@ -695,7 +864,7 @@ declare namespace  ReactNative {
     /**
      * @see https://facebook.github.io/react-native/docs/view.html#props
      */
-    export interface ViewProperties extends ViewPropertiesAndroid, ViewPropertiesIOS, React.Props<ViewStatic> {
+    export interface ViewProperties extends ViewPropertiesAndroid, ViewPropertiesIOS, GestureResponderHandlers, React.Props<ViewStatic> {
 
         /**
          * Overrides the text that's read by the screen reader when the user interacts with the element. By default, the label is constructed by traversing all the children and accumulating all the Text nodes separated by space.
@@ -724,31 +893,6 @@ declare namespace  ReactNative {
          * When accessible is true, the system will invoke this function when the user performs the magic tap gesture.
          */
         onMagicTap?: () => void;
-
-        onMoveShouldSetResponder?: () => void;
-
-        onMoveShouldSetResponderCapture?: () => void;
-
-        /**
-         * For most touch interactions, you'll simply want to wrap your component in TouchableHighlight or TouchableOpacity.
-         * Check out Touchable.js, ScrollResponder.js and ResponderEventPlugin.js for more discussion.
-         */
-        onResponderGrant?: () => void;
-
-        onResponderMove?: () => void;
-
-        onResponderReject?: () => void;
-
-        onResponderRelease?: () => void;
-
-        onResponderTerminate?: () => void;
-
-        onResponderTerminationRequest?: () => void;
-
-        onStartShouldSetResponder?: () => void;
-
-        onStartShouldSetResponderCapture?: () => void;
-
 
         /**
          *
@@ -797,7 +941,7 @@ declare namespace  ReactNative {
      * View maps directly to the native view equivalent on whatever platform React is running on,
      * whether that is a UIView, <div>, android.view, etc.
      */
-    export interface ViewStatic extends React.ComponentClass<ViewProperties> {
+    export interface ViewStatic extends NativeComponent, React.ComponentClass<ViewProperties> {
 
     }
 
@@ -2279,83 +2423,6 @@ declare namespace  ReactNative {
     }
 
 
-    export interface PanHandlers {
-
-    }
-
-    export interface PanResponderEvent {
-
-    }
-
-    export interface PanResponderGestureState {
-        stateID: number;
-        moveX: number;
-        moveY: number;
-        x0: number;
-        y0: number;
-        dx: number;
-        dy: number;
-        vx: number;
-        vy: number;
-        numberActiveTouches: number;
-        // All `gestureState` accounts for timeStamps up until:
-        _accountsForMovesUpTo: number;
-    }
-
-    /**
-     * @param {object} config Enhanced versions of all of the responder callbacks
-     * that provide not only the typical `ResponderSyntheticEvent`, but also the
-     * `PanResponder` gesture state.  Simply replace the word `Responder` with
-     * `PanResponder` in each of the typical `onResponder*` callbacks. For
-     * example, the `config` object would look like:
-     *
-     *  - `onMoveShouldSetPanResponder: (e, gestureState) => {...}`
-     *  - `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`
-     *  - `onStartShouldSetPanResponder: (e, gestureState) => {...}`
-     *  - `onStartShouldSetPanResponderCapture: (e, gestureState) => {...}`
-     *  - `onPanResponderReject: (e, gestureState) => {...}`
-     *  - `onPanResponderGrant: (e, gestureState) => {...}`
-     *  - `onPanResponderStart: (e, gestureState) => {...}`
-     *  - `onPanResponderEnd: (e, gestureState) => {...}`
-     *  - `onPanResponderRelease: (e, gestureState) => {...}`
-     *  - `onPanResponderMove: (e, gestureState) => {...}`
-     *  - `onPanResponderTerminate: (e, gestureState) => {...}`
-     *  - `onPanResponderTerminationRequest: (e, gestureState) => {...}`
-     *
-     *  In general, for events that have capture equivalents, we update the
-     *  gestureState once in the capture phase and can use it in the bubble phase
-     *  as well.
-     *
-     *  Be careful with onStartShould* callbacks. They only reflect updated
-     *  `gestureState` for start/end events that bubble/capture to the Node.
-     *  Once the node is the responder, you can rely on every start/end event
-     *  being processed by the gesture and `gestureState` being updated
-     *  accordingly. (numberActiveTouches) may not be totally accurate unless you
-     *  are the responder.
-     */
-    export interface PanResponderCallbacks {
-        onMoveShouldSetPanResponder?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean;
-        onStartShouldSetPanResponder?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderGrant?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderMove?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderRelease?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderTerminate?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-
-        onMoveShouldSetPanResponderCapture?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean;
-        onStartShouldSetPanResponderCapture?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean;
-        onPanResponderReject?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderStart?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderEnd?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-        onPanResponderTerminationRequest?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void;
-    }
-
-    export interface PanResponderInstance {
-        panHandlers: PanHandlers;
-    }
-
-    export interface PanResponderStatic {
-        create( callbacks: PanResponderCallbacks ): PanResponderInstance;
-    }
 
     export interface PixelRatioStatic {
         get(): number;
@@ -2927,9 +2994,157 @@ declare namespace  ReactNative {
 
         //FIXME: Documentation missing
         isConnectionMetered: any
+    }
 
+    /**
+     * //FIXME: Documentation ?
+     */
+    export interface PanResponderEvent {
+
+        bubbles: boolean
+        cancelable: boolean
+        currentTarget: number
+        defaultPrevented: boolean
+        dispatchConfig: any
+        dispatchMarker: any
+        eventPhase: any
+        isDefaultPrevented: () => boolean
+        isPropagationStopped: () => boolean
+        isTrusted: boolean
+        nativeEvent: GestureResponderEvent
+        path: any
+        target: number
+        timeStamp: number
+        touchHistory: any[]
+        type: any
 
     }
+
+
+    export interface PanResponderGestureState {
+
+        /**
+         *  ID of the gestureState- persisted as long as there at least one touch on
+         */
+        stateID: number
+
+        /**
+         *  the latest screen coordinates of the recently-moved touch
+         */
+        moveX: number
+
+        /**
+         *  the latest screen coordinates of the recently-moved touch
+         */
+        moveY: number
+
+        /**
+         * the screen coordinates of the responder grant
+         */
+        x0: number
+
+        /**
+         * the screen coordinates of the responder grant
+         */
+        y0: number
+
+        /**
+         * accumulated distance of the gesture since the touch started
+         */
+        dx: number
+
+        /**
+         * accumulated distance of the gesture since the touch started
+         */
+        dy: number
+
+        /**
+         * current velocity of the gesture
+         */
+        vx: number
+
+        /**
+         * current velocity of the gesture
+         */
+        vy: number
+
+        /**
+         * Number of touches currently on screeen
+         */
+        numberActiveTouches: number
+
+
+        // All `gestureState` accounts for timeStamps up until:
+        _accountsForMovesUpTo: number
+    }
+
+
+    /**
+     * @see documentation of GestureResponderHandlers
+     */
+    export interface PanResponderCallbacks {
+        onMoveShouldSetPanResponder?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean
+        onStartShouldSetPanResponder?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderGrant?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderMove?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderRelease?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderTerminate?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+
+        onMoveShouldSetPanResponderCapture?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean
+        onStartShouldSetPanResponderCapture?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean
+        onPanResponderReject?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderStart?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderEnd?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => void
+        onPanResponderTerminationRequest?: ( e: PanResponderEvent, gestureState: PanResponderGestureState ) => boolean
+    }
+
+    export interface PanResponderInstance {
+        panHandlers: GestureResponderHandlers
+    }
+
+    /**
+     * PanResponder reconciles several touches into a single gesture.
+     * It makes single-touch gestures resilient to extra touches,
+     * and can be used to recognize simple multi-touch gestures.
+     *
+     * It provides a predictable wrapper of the responder handlers provided by the gesture responder system.
+     * For each handler, it provides a new gestureState object alongside the normal event.
+     */
+    export interface PanResponderStatic {
+        /**
+         * @param config Enhanced versions of all of the responder callbacks
+         * that provide not only the typical `ResponderSyntheticEvent`, but also the
+         * `PanResponder` gesture state.  Simply replace the word `Responder` with
+         * `PanResponder` in each of the typical `onResponder*` callbacks. For
+         * example, the `config` object would look like:
+         *
+         *  - `onMoveShouldSetPanResponder: (e, gestureState) => {...}`
+         *  - `onMoveShouldSetPanResponderCapture: (e, gestureState) => {...}`
+         *  - `onStartShouldSetPanResponder: (e, gestureState) => {...}`
+         *  - `onStartShouldSetPanResponderCapture: (e, gestureState) => {...}`
+         *  - `onPanResponderReject: (e, gestureState) => {...}`
+         *  - `onPanResponderGrant: (e, gestureState) => {...}`
+         *  - `onPanResponderStart: (e, gestureState) => {...}`
+         *  - `onPanResponderEnd: (e, gestureState) => {...}`
+         *  - `onPanResponderRelease: (e, gestureState) => {...}`
+         *  - `onPanResponderMove: (e, gestureState) => {...}`
+         *  - `onPanResponderTerminate: (e, gestureState) => {...}`
+         *  - `onPanResponderTerminationRequest: (e, gestureState) => {...}`
+         *
+         *  In general, for events that have capture equivalents, we update the
+         *  gestureState once in the capture phase and can use it in the bubble phase
+         *  as well.
+         *
+         *  Be careful with onStartShould* callbacks. They only reflect updated
+         *  `gestureState` for start/end events that bubble/capture to the Node.
+         *  Once the node is the responder, you can rely on every start/end event
+         *  being processed by the gesture and `gestureState` being updated
+         *  accordingly. (numberActiveTouches) may not be totally accurate unless you
+         *  are the responder.
+         */
+        create( config: PanResponderCallbacks ): PanResponderInstance
+    }
+
 
 
     //////////////////////////////////////////////////////////////////////////
@@ -2941,68 +3156,68 @@ declare namespace  ReactNative {
     // export var AppRegistry: AppRegistryStatic;
 
 
-    export var ActivityIndicatorIOS: ActivityIndicatorIOSStatic;
-    export type ActivityIndicatorIOS = ActivityIndicatorIOSStatic;
+    export var ActivityIndicatorIOS: ActivityIndicatorIOSStatic
+    export type ActivityIndicatorIOS = ActivityIndicatorIOSStatic
 
     export var DatePickerIOS: DatePickerIOSStatic
     export type DatePickerIOS = DatePickerIOSStatic
 
-    export var Image: ImageStatic;
-    export type Image = ImageStatic;
+    export var Image: ImageStatic
+    export type Image = ImageStatic
 
-    export var LayoutAnimation: LayoutAnimationStatic;
-    export type LayoutAnimation = LayoutAnimationStatic;
+    export var LayoutAnimation: LayoutAnimationStatic
+    export type LayoutAnimation = LayoutAnimationStatic
 
-    export var ListView: ListViewStatic;
-    export type ListView = ListViewStatic;
+    export var ListView: ListViewStatic
+    export type ListView = ListViewStatic
 
-    export var MapView: MapViewStatic;
-    export type MapView = MapViewStatic;
+    export var MapView: MapViewStatic
+    export type MapView = MapViewStatic
 
-    export var Navigator: NavigatorStatic;
-    export type Navigator = NavigatorStatic;
+    export var Navigator: NavigatorStatic
+    export type Navigator = NavigatorStatic
 
-    export var NavigatorIOS: NavigatorIOSStatic;
-    export type NavigatorIOS = NavigatorIOSStatic;
+    export var NavigatorIOS: NavigatorIOSStatic
+    export type NavigatorIOS = NavigatorIOSStatic
 
     export var PickerIOS: PickerIOSStatic
     export type PickerIOS = PickerIOSStatic
 
-    export var SliderIOS: SliderIOSStatic;
-    export type SliderIOS = SliderIOSStatic;
+    export var SliderIOS: SliderIOSStatic
+    export type SliderIOS = SliderIOSStatic
 
     export var ScrollView: ScrollViewStatic
     export type ScrollView = ScrollViewStatic
 
-    export var StyleSheet: StyleSheetStatic;
-    export type StyleSheet = StyleSheetStatic;
+    export var StyleSheet: StyleSheetStatic
+    export type StyleSheet = StyleSheetStatic
 
     export var SwitchIOS: SwitchIOSStatic
     export type SwitchIOS = SwitchIOSStatic
 
-    export var TabBarIOS: TabBarIOSStatic;
-    export type TabBarIOS = TabBarIOSStatic;
+    export var TabBarIOS: TabBarIOSStatic
+    export type TabBarIOS = TabBarIOSStatic
 
-    export var Text: TextStatic;
-    export type Text = TextStatic;
+    export var Text: TextStatic
+    export type Text = TextStatic
 
     export var TextInput: TextInputStatic
     export type TextInput = TextInputStatic
 
-    export var TouchableHighlight: TouchableHighlightStatic;
-    export type TouchableHighlight = TouchableHighlightStatic;
+    export var TouchableHighlight: TouchableHighlightStatic
+    export type TouchableHighlight = TouchableHighlightStatic
 
-    export var TouchableNativeFeedback: TouchableNativeFeedbackStatic;
-    export type TouchableNativeFeedback = TouchableNativeFeedbackStatic;
+    export var TouchableNativeFeedback: TouchableNativeFeedbackStatic
+    export type TouchableNativeFeedback = TouchableNativeFeedbackStatic
 
-    export var TouchableOpacity: TouchableOpacityStatic;
-    export type TouchableOpacity = TouchableOpacityStatic;
+    export var TouchableOpacity: TouchableOpacityStatic
+    export type TouchableOpacity = TouchableOpacityStatic
 
-    export var TouchableWithoutFeedback: TouchableWithoutFeedbackStatic;
-    export type TouchableWithoutFeedback= TouchableWithoutFeedbackStatic;
+    export var TouchableWithoutFeedback: TouchableWithoutFeedbackStatic
+    export type TouchableWithoutFeedback= TouchableWithoutFeedbackStatic
 
-    export var View: ViewStatic;
-    export type View = ViewStatic;
+    export var View: ViewStatic
+    export type View = ViewStatic
 
     export var WebView: WebViewStatic
     export type WebView = WebViewStatic
@@ -3018,24 +3233,30 @@ declare namespace  ReactNative {
     export var AlertIOS: AlertIOSStatic
     export type AlertIOS = AlertIOSStatic
 
+    export var AppStateIOS: AppStateIOSStatic
+    export type AppStateIOS = AppStateIOSStatic
+
     export var AsyncStorage: AsyncStorageStatic
     export type AsyncStorage = AsyncStorageStatic
 
-    export var CameraRoll: CameraRollStatic;
-    export type CameraRoll = CameraRollStatic;
+    export var CameraRoll: CameraRollStatic
+    export type CameraRoll = CameraRollStatic
 
     export var NetInfo: NetInfoStatic
     export type NetInfo = NetInfoStatic
 
-    export var SegmentedControlIOS: React.ComponentClass<SegmentedControlIOSProperties>;
+    export var PanResponder: PanResponderStatic
+    export type PanResponder = PanResponderStatic
 
-    export var PixelRatio: PixelRatioStatic;
-    export var DeviceEventEmitter: DeviceEventEmitterStatic;
-    export var DeviceEventSubscription: DeviceEventSubscriptionStatic;
-    export type DeviceEventSubscription = DeviceEventSubscriptionStatic;
-    export var InteractionManager: InteractionManagerStatic;
-    export var PanResponder: PanResponderStatic;
-    export var AppStateIOS: AppStateIOSStatic;
+    export var SegmentedControlIOS: React.ComponentClass<SegmentedControlIOSProperties>
+
+    export var PixelRatio: PixelRatioStatic
+    export var DeviceEventEmitter: DeviceEventEmitterStatic
+    export var DeviceEventSubscription: DeviceEventSubscriptionStatic
+    export type DeviceEventSubscription = DeviceEventSubscriptionStatic
+    export var InteractionManager: InteractionManagerStatic
+
+
 
 
     //////////////////////////////////////////////////////////////////////////
