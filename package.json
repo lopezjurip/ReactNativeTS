@@ -9,7 +9,7 @@
     "android": "adb reverse tcp:8081 tcp:8081 && react-native run-android"
   },
   "dependencies": {
-    "react-native": "^0.15.0"
+    "react-native": "^0.16.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",
