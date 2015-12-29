@@ -6,10 +6,10 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "react-native/react-native.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
     },
     "react/react.d.ts": {
-      "commit": "fc341765ebbb04b7109981a25dced01f488f4d94"
+      "commit": "dc9dabe74a5be62613b17a3605309783a12ff28a"
     }
   }
 }
