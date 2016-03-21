@@ -15,7 +15,12 @@
         "src/**/*.tsx"
     ],
     "exclude": [
+        "typings/browser.d.ts",
+        "typings/browser",
         "node_modules"
     ],
-    "compileOnSave": false
+    "compileOnSave": false,
+    "atom": {
+        "rewriteTsconfig": false
+    }
 }

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "node node_modules/typings/dist/bin.js install",
     "build": "gulp build",
     "watch": "gulp watch",
     "start": "concurrent \"npm run watch\" \"node node_modules/react-native/local-cli/cli.js start\" ",
@@ -17,6 +18,7 @@
     "concurrently": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^2.12.1",
-    "typescript": "^1.8.9"
+    "typescript": "^1.8.9",
+    "typings": "^0.7.9"
   }
 }
