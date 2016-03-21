@@ -38,7 +38,11 @@ npm start
 
 ### iOS
 
-Open `ios/ReactNativeTS.xcodeproj` in XCode.
+Run:
+
+```sh
+npm run ios
+```
 
 ### Android
 
