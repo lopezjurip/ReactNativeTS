@@ -1,7 +1,6 @@
 language: node_js
 
 node_js:
-  - "4.2.2"
-  - "5.2.0"
+  - "5.9.0"
 
-script: gulp build
+script: npm run build
