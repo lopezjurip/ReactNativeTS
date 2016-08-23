@@ -2,9 +2,11 @@
 
 [![Build Status][ci-image]][ci-url] [![dependencies][dependencies-image]][dependencies-url] [![dev-dependencies][dev-dependencies-image]][dev-dependencies-url]
 
-Minimal template of a React Native project in Typescript.
+Minimal template of a [React Native](https://facebook.github.io/react-native/) project with [Typescript](https://www.typescriptlang.org/).
 
-> Follow each step as a commit to see how to setup a React Native project with Typescript.
+![preview](https://github.com/mrpatiwi/ReactNativeTS/raw/images/preview.png)
+
+> Recommended usage with [VSCode](https://code.visualstudio.com/)
 
 ## Getting Started
 
@@ -21,7 +23,7 @@ Install dependencies:
 npm install
 ```
 
-Watch files and start React Native server:
+Start React Native server:
 
 ```sh
 npm start
@@ -29,15 +31,11 @@ npm start
 
 ### iOS
 
-Run:
-
 ```sh
 npm run ios
 ```
 
 ### Android
-
-Run:
 
 ```sh
 npm run android
