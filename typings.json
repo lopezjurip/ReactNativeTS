@@ -1,9 +1,8 @@
 {
   "name": "ReactNativeTS",
-  "version": false,
   "dependencies": {},
-  "ambientDependencies": {
-    "react": "registry:dt/react#0.14.0+20160319053454",
-    "react-native": "registry:dt/react-native#0.19.0+20160316155526"
+  "globalDependencies": {
+    "react": "registry:dt/react#0.14.0+20160817201227",
+    "react-native": "registry:dt/react-native#0.29.0+20160728152643"
   }
 }

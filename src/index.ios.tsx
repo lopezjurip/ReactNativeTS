@@ -1,8 +1,15 @@
-import * as React from "react-native";
-const { View, Text, StyleSheet } = React;
+import React, { Component } from "react";
+import { View, Text, StyleSheet } from "react-native";
 
+interface Props {
 
-export default class App extends React.Component<any, any> {
+}
+
+interface State {
+
+}
+
+export default class App extends Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
@@ -27,15 +34,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#F5FCFF",
-    },
+    } as React.ViewStyle,
     welcome: {
         fontSize: 20,
         textAlign: "center",
         margin: 10,
-    },
+    } as React.TextStyle,
     instructions: {
         textAlign: "center",
         color: "#333333",
         marginBottom: 5,
-    },
+    } as React.TextStyle,
 });

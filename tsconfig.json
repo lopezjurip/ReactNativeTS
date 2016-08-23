@@ -1,26 +1,27 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es2015",
         "jsx": "react",
+        "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "preserveConstEnums": true,
-        "outDir": "built",
+        "outDir": "build",
         "rootDir": "src",
         "sourceMap": true
     },
     "filesGlob": [
-        "typings/**/*.d.ts",
+        "typings/index.d.ts",
+        "typings/globals/**/*.d.ts",
         "src/**/*.ts",
         "src/**/*.tsx"
     ],
     "exclude": [
-        "typings/browser.d.ts",
+        "typings/main",
+        "typings/main.d.ts",
         "typings/browser",
+        "typings/browser.d.ts",
         "node_modules"
     ],
-    "compileOnSave": false,
-    "atom": {
-        "rewriteTsconfig": false
-    }
+    "compileOnSave": true
 }
