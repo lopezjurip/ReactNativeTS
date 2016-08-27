@@ -29,6 +29,16 @@ Start React Native server:
 npm start
 ```
 
+Build the source-code with Typescript:
+
+```sh
+# Build once
+npm run build
+
+# Build and watch for changes
+npm run build -- --watch
+```
+
 ### iOS
 
 ```sh

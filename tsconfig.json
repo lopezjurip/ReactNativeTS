@@ -23,5 +23,5 @@
         "typings/browser.d.ts",
         "node_modules"
     ],
-    "compileOnSave": true
+    "compileOnSave": false
 }
