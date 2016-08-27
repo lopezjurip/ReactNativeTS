@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
+import HelloWorld from "./components/HelloWorld/index";
+
 interface Props {
 
 }
@@ -22,6 +24,8 @@ export default class App extends Component<Props, State> {
                 <Text style={styles.instructions}>
                     Shake or press menu button for dev menu
                 </Text>
+
+                <HelloWorld style={styles.helloworld} max={10} />
             </View>
         );
     }
@@ -34,14 +38,20 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#F5FCFF",
     } as React.ViewStyle,
+
     welcome: {
         fontSize: 20,
         textAlign: "center",
         margin: 10,
     } as React.TextStyle,
+
     instructions: {
         textAlign: "center",
         color: "#333333",
         marginBottom: 5,
     } as React.TextStyle,
+
+    helloworld: {
+        marginVertical: 15,
+    } as React.ViewStyle,
 });
