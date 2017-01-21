@@ -2,5 +2,10 @@ language: node_js
 
 node_js:
   - "6"
+  - "7"
 
-script: npm run build
+# See: https://docs.travis-ci.com/user/languages/javascript-with-nodejs#Travis-CI-supports-yarn
+cache:
+  yarn: true
+
+script: yarn build
