@@ -22,7 +22,7 @@ cd ReactNativeTS
 Install dependencies:
 
 ```sh
-yarn install
+yarn
 ```
 
 Start React Native server:
