@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es2015",
-        "module": "es2015",
-        "jsx": "react",
+        "target": "es6",
+        "module": "commonjs",
+        "jsx": "preserve",
         "outDir": "build",
         "rootDir": "src",
         "allowSyntheticDefaultImports": true,
@@ -12,10 +12,10 @@
         "allowJs": true,
         "sourceMap": true
     },
-    "filesGlob": [
-        "typings/index.d.ts",
-        "src/**/*.ts",
-        "src/**/*.tsx"
+    "include": [
+        "typings/**/*",
+        "src/**/*",
+        "__tests__/**/*"
     ],
     "exclude": [
         "index.android.js",

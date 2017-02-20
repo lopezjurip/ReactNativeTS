@@ -9,7 +9,8 @@
     "android": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "prebuild": "rm -rf build",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "jest"
   },
   "dependencies": {
     "react": "^15.4.2",
@@ -17,8 +18,26 @@
     "react-native-button": "^1.7.1"
   },
   "devDependencies": {
+    "babel-jest": "^18.0.0",
+    "babel-preset-react-native": "^1.9.1",
+    "jest": "^18.1.0",
+    "react-test-renderer": "^15.4.2",
+    "ts-jest": "^18.0.1",
     "tslint": "^4.0.2",
     "typescript": "^2.0.10",
     "typings": "^2.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/preprocessor.js"
+    },
+    "testRegex": "__tests__/.*\\.(ts|tsx|js)$"
   }
 }
