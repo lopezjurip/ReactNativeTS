@@ -10,6 +10,8 @@ Minimal template of a [React Native](https://facebook.github.io/react-native/) p
 
 ## Getting Started
 
+* Requirements: [Node.js](https://nodejs.org) and [Yarn](https://yarnpkg.com/)
+
 Clone this repository:
 
 ```sh
@@ -20,35 +22,35 @@ cd ReactNativeTS
 Install dependencies:
 
 ```sh
-npm install
+yarn
 ```
 
 Start React Native server:
 
 ```sh
-npm start
+yarn start
 ```
 
 Build the source-code with Typescript:
 
 ```sh
 # Build once
-npm run build
+yarn run build
 
 # Build and watch for changes
-npm run build -- --watch
+yarn run build -- --watch
 ```
 
 ### iOS
 
 ```sh
-npm run ios
+yarn run ios
 ```
 
 ### Android
 
 ```sh
-npm run android
+yarn run android
 ```
 
 [ci-image]: https://travis-ci.org/mrpatiwi/ReactNativeTS.svg

@@ -14,15 +14,10 @@
     },
     "filesGlob": [
         "typings/index.d.ts",
-        "typings/globals/**/*.d.ts",
         "src/**/*.ts",
         "src/**/*.tsx"
     ],
     "exclude": [
-        "typings/main",
-        "typings/main.d.ts",
-        "typings/browser",
-        "typings/browser.d.ts",
         "index.android.js",
         "index.ios.js",
         "build",
