@@ -2833,6 +2833,12 @@ rimraf@^2.2.8, rimraf@^2.4.4, rimraf@^2.5.4:
   dependencies:
     glob "^7.0.5"
 
+rimraf@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.0.tgz#89b8a0fe432b9ff9ec9a925a00b6cdb3a91bbada"
+  dependencies:
+    glob "^7.0.5"
+
 rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"

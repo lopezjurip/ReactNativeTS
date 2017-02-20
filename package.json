@@ -3,12 +3,12 @@
   "version": "0.0.3",
   "private": true,
   "scripts": {
-    "preinstall": "rm -rf typings",
+    "preinstall": "rimraf typings",
     "postinstall": "node node_modules/typings/dist/bin.js install",
     "start": "node node_modules/react-native/local-cli/cli.js start --transformer node_modules/react-native-sm-transformer --skipflow",
     "android": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "prebuild": "rm -rf build",
+    "prebuild": "rimraf build",
     "build": "tsc"
   },
   "dependencies": {
@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "react-native-sm-transformer": "^1.0.2",
+    "rimraf": "^2.6.0",
     "tslint": "^4.4.2",
     "typescript": "^2.1.5",
     "typings": "^2.1.0"
