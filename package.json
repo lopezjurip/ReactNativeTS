@@ -5,7 +5,7 @@
   "scripts": {
     "preinstall": "rm -rf typings",
     "postinstall": "node node_modules/typings/dist/bin.js install",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --transformer node_modules/react-native-sm-transformer --skipflow",
     "android": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "prebuild": "rm -rf build",
@@ -19,6 +19,7 @@
   "devDependencies": {
     "tslint": "^4.4.2",
     "typescript": "^2.1.5",
-    "typings": "^2.1.0"
+    "typings": "^2.1.0",
+    "react-native-sm-transformer": "^1.0.2"
   }
 }
