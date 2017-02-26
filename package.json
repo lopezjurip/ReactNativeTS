@@ -3,7 +3,6 @@
   "version": "0.0.3",
   "private": true,
   "scripts": {
-    "preinstall": "node node_modules/.bin/rimraf typings",
     "postinstall": "node node_modules/typings/dist/bin.js install",
     "start": "node node_modules/react-native/local-cli/cli.js start --transformer node_modules/react-native-sm-transformer --skipflow",
     "android": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js run-android",
