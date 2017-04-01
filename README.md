@@ -1,5 +1,7 @@
 # ReactNativeTS
 
+**⚠️ Warning: this repository is not up-to-date with the latest Typescript and React-native settings. Help is appreciated.**
+
 [![Build Status][ci-image]][ci-url] [![dependencies][dependencies-image]][dependencies-url] [![dev-dependencies][dev-dependencies-image]][dev-dependencies-url]
 
 Minimal template of a [React Native](https://facebook.github.io/react-native/) project with [Typescript](https://www.typescriptlang.org/).
