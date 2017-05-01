@@ -1,25 +1,44 @@
 {
   "name": "ReactNativeTS",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "node node_modules/typings/dist/bin.js install",
-    "start": "node node_modules/react-native/local-cli/cli.js start --transformer node_modules/react-native-sm-transformer --skipflow",
-    "android": "adb reverse tcp:8081 tcp:8081 && node node_modules/react-native/local-cli/cli.js run-android",
+    "start": "node node_modules/react-native/local-cli/cli.js start --skipflow",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "prebuild": "node node_modules/.bin/rimraf build",
-    "build": "tsc"
+    "build": "tsc",
+    "pretest": "npm run build",
+    "test": "jest"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-native": "0.41.2",
-    "react-native-button": "^1.8.2"
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.0"
   },
   "devDependencies": {
-    "react-native-sm-transformer": "^1.0.2",
-    "rimraf": "^2.6.0",
-    "tslint": "^4.4.2",
-    "typescript": "^2.1.5",
-    "typings": "^2.1.0"
+    "@types/jest": "^19.2.2",
+    "@types/react": "^15.0.23",
+    "@types/react-native": "^0.43.7",
+    "@types/react-test-renderer": "^15.5.0",
+    "babel-jest": "^19.0.0",
+    "babel-preset-react-native": "^1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "16.0.0-alpha.6",
+    "rimraf": "^2.6.1",
+    "ts-jest": "^19.0.14",
+    "typescript": "^2.3.2"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   }
 }

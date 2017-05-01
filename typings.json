@@ -1,7 +1,0 @@
-{
-  "name": "ReactNativeTS",
-  "dependencies": {
-    "react": "registry:npm/react#15.0.1+20170104200836",
-    "react-native": "registry:dt/react-native#0.37.0+20170123203653"
-  }
-}

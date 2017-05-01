@@ -1,10 +1,10 @@
 # ReactNativeTS
 
-**⚠️ Warning: this repository is not up-to-date with the latest Typescript and React-native settings. Help is appreciated.**
-
 [![Build Status][ci-image]][ci-url] [![dependencies][dependencies-image]][dependencies-url] [![dev-dependencies][dev-dependencies-image]][dev-dependencies-url]
 
 Minimal template of a [React Native](https://facebook.github.io/react-native/) project with [Typescript](https://www.typescriptlang.org/).
+
+> **This project has been updated but the Medium guide has not**. Please, use this repository as reference.
 
 ![preview](https://github.com/mrpatiwi/ReactNativeTS/raw/images/preview.png)
 
@@ -53,6 +53,14 @@ yarn run ios
 
 ```sh
 yarn run android
+```
+
+## Testing
+
+This project uses Typescript + Jest. Run the test suite with:
+
+```sh
+yarn test
 ```
 
 [ci-image]: https://travis-ci.org/mrpatiwi/ReactNativeTS.svg
