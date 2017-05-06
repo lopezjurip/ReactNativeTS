@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@types/jest@^19.2.2":
-  version "19.2.2"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-19.2.2.tgz#71f428be2fa6eb9f15bb0abc3cade67905f94839"
+"@types/jest@^19.2.3":
+  version "19.2.3"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-19.2.3.tgz#61748040e8589a891dfc2ec1d16a2dd74482980e"
 
-"@types/react-native@^0.43.7":
-  version "0.43.7"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.43.7.tgz#ca2f3d9c05156111e864da53022b70f1d78fd6af"
+"@types/react-native@^0.43.11":
+  version "0.43.11"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.43.11.tgz#cc39713dce3c7d147eb447c193c6132362682d25"
   dependencies:
     "@types/react" "*"
 
@@ -18,9 +18,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^15.0.23":
-  version "15.0.23"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.23.tgz#f3facbef5290610f54242f00308759d3a3c27346"
+"@types/react@*", "@types/react@^15.0.24":
+  version "15.0.24"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.24.tgz#8a75299dc37906df327c18ca918bf97a55e7123b"
 
 abab@^1.0.3:
   version "1.0.3"
@@ -355,7 +355,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@19.0.0, babel-jest@^19.0.0:
+babel-jest@^19.0.0:
   version "19.0.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-19.0.0.tgz#59323ced99a3a84d359da219ca881074ffc6ce3f"
   dependencies:
@@ -727,7 +727,7 @@ babel-preset-jest@^19.0.0:
   dependencies:
     babel-plugin-jest-hoist "^19.0.0"
 
-babel-preset-react-native@1.9.1, babel-preset-react-native@^1.9.1:
+babel-preset-react-native@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-1.9.1.tgz#ec8e378274410d78f550fa9f8edd70353f3bb2fe"
   dependencies:
