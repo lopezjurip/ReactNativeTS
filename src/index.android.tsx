@@ -1,28 +1,33 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, ViewStyle, TextStyle } from "react-native";
+import React, { Component } from "react"
+import { View, Text, StyleSheet, ViewStyle, TextStyle } from "react-native"
+import { Provider } from 'react-redux'
+import store from 'store/index'
+import { translationMessages } from 'i18n'
 
-interface Props {
+import LanguageProvider from 'containers/LanguageProvider'
 
-}
+interface Props {}
 
-interface State {
-
-}
+interface State {}
 
 export default class App extends Component<Props, State> {
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>
-                    Welcome to React Native!
-                </Text>
-                <Text style={styles.instructions}>
-                    To get started, edit index.android.js
-                </Text>
-                <Text style={styles.instructions}>
-                    Shake or press menu button for dev menu
-                </Text>
-            </View>
+            <Provider store={store}>
+                <LanguageProvider messages={translationMessages}>
+                    <View style={styles.container}>
+                        <Text style={styles.welcome}>
+                            Welcome to React Native!
+                        </Text>
+                        <Text style={styles.instructions}>
+                            To get started, edit index.android.js
+                        </Text>
+                        <Text style={styles.instructions}>
+                            Shake or press menu button for dev menu
+                        </Text>
+                    </View>
+                </LanguageProvider>
+            </Provider>
         );
     }
 }

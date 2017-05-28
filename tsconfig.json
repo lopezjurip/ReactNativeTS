@@ -8,7 +8,7 @@
     "outDir": "./build",
     "rootDir": "./src",
     "removeComments": false,
-
+    "lib":["dom","es2017"],
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -19,12 +19,18 @@
     "baseUrl": ".",
     "paths": {
         "components/*": ["./src/components/*"],
-        "store/*": ["./src/store/*"]
+        "config": ["./src/config/index.ts"],
+        "containers/*": ["./src/containers/*"],
+        "store/*": ["./src/store/*"],
+        "translations/*": ["./src/translations/*"],
+        "i18n": ["./src/i18n.ts"]
     },
+    "typeRoots": [
+        "./src/types"
+    ],
     "allowSyntheticDefaultImports": true,
 
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "experimentalDecorators": true
   },
   "include": [
     "src/**/*"
