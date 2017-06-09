@@ -1,4 +1,4 @@
-const config = {
+export default {
   appName: 'MyApp',
   storeKey: 'myAppStoreKey',
   language: {
@@ -7,5 +7,3 @@ const config = {
   },
   actionsToPersist: []
 }
-
-export default config

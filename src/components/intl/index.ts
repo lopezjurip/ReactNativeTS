@@ -1,5 +1,13 @@
-export FormattedDate from './FormattedDate'
-export FormattedMessage from './FormattedMessage'
-export FormattedNumber from './FormattedNumber'
-export FormattedPlural from './FormattedPlural'
-export FormattedTime from './FormattedTime'
+import FormattedDate from './FormattedDate'
+import FormattedMessage from './FormattedMessage'
+import FormattedNumber from './FormattedNumber'
+import FormattedPlural from './FormattedPlural'
+import FormattedTime from './FormattedTime'
+
+export {
+    FormattedDate,
+    FormattedMessage,
+    FormattedNumber,
+    FormattedPlural,
+    FormattedTime
+}
