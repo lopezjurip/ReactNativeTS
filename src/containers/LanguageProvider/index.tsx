@@ -18,7 +18,8 @@ const LanguageProvider: StatelessComponent<LanguageProviderProps> = ({
 )
 
 export default connect(
-    (state: AppState) => ({
+    (state: AppState, props: LanguageProviderProps) => ({
+        ...props,
         locale: selectLocale(state)
     })
 )(LanguageProvider)
