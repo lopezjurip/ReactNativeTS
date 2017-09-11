@@ -1,5 +1,7 @@
 # ReactNativeTS
 
+**:warning: Not maintained anymore, better check [`Microsoft/TypeScript-React-Native-Starter`](https://github.com/Microsoft/TypeScript-React-Native-Starter).**
+
 [![Build Status][ci-image]][ci-url] [![dependencies][dependencies-image]][dependencies-url] [![dev-dependencies][dev-dependencies-image]][dev-dependencies-url]
 
 Minimal template of a [React Native](https://facebook.github.io/react-native/) project with [Typescript](https://www.typescriptlang.org/).
